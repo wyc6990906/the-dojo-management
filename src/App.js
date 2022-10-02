@@ -17,29 +17,29 @@ function App() {
     <div className="App">
       {authIsReady && (
         <BrowserRouter>
-          {user && <Sidebar />}
+          {user && <Sidebar/>}
           <div className="container">
-            <Navbar />
+            <Navbar/>
             <Switch>
               <Route exact path="/">
-                {!user && <Redirect to="/login" />}
-                {user && <Dashboard />}
+                {!user && <Redirect to="/login"/>}
+                {user && <Dashboard/>}
               </Route>
               <Route path="/create">
-                {!user && <Redirect to="/login" />}
-                {user && <Create />}
+                {!user && <Redirect to="/login"/>}
+                {user && <Create/>}
               </Route>
               <Route path="/projects/:id">
-                {!user && <Redirect to="/login" />}
-                {user && <Project />}
+                {!user && <Redirect to="/login"/>}
+                {user && <Project/>}
               </Route>
               <Route path="/login">
-                {user && <Redirect to="/" /> }
-                {!user && <Login /> }
+                {user && <Redirect to="/"/>}
+                {!user && <Login/>}
               </Route>
               <Route path="/signup">
-                {user && <Redirect to="/" /> }
-                {!user && <Signup /> }
+                {user && <Redirect to="/"/>}
+                {!user && <Signup/>}
               </Route>
             </Switch>
           </div>
