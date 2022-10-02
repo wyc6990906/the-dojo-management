@@ -7,6 +7,7 @@ import Project from "./pages/project/Project";
 import Create from "./pages/create/Create";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import OnlineUsers from "./components/OnlineUsers";
 import {useAuthContext} from "./hooks/useAuthContext";
 import './App.css'
 
@@ -43,6 +44,7 @@ function App() {
               </Route>
             </Switch>
           </div>
+          {user && <OnlineUsers/>}
         </BrowserRouter>
       )}
     </div>
