@@ -20,6 +20,7 @@ const Create = () => {
   const [assignedUsers, setAssignedUsers] = useState([])
   const {documents} = useCollection('users')
   const [users, setUsers] = useState([])
+  const [formError, setFormError] = useState(null)
 
   useEffect(() => {
     if (documents) {
@@ -36,7 +37,16 @@ const Create = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(name, details, dueDate, category.value,assignedUsers.value)
+    setFormError(null)
+    if (!category) {
+      setFormError('Please select a project category')
+      return
+    }
+    if (assignedUsers.length < 1) {
+      setFormError('Please assign the project to at least one user')
+      return;
+    }
+    console.log(name, details, dueDate, category.value, assignedUsers.value)
   }
 
   return (
@@ -85,6 +95,7 @@ const Create = () => {
         </label>
 
         <button className="btn">Add Project</button>
+        {formError && <p className="error">{formError}</p>}
 
       </form>
     </div>
