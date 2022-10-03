@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Select from "react-select";
 import {useCollection} from "../../hooks/useCollection";
+import {timestamp} from "../../firebase/config";
+import {useAuthContext} from "../../hooks/useAuthContext";
 import "./Create.css"
 
 const categories = [
@@ -21,6 +23,7 @@ const Create = () => {
   const {documents} = useCollection('users')
   const [users, setUsers] = useState([])
   const [formError, setFormError] = useState(null)
+  const {user} = useAuthContext()
 
   useEffect(() => {
     if (documents) {
@@ -46,7 +49,33 @@ const Create = () => {
       setFormError('Please assign the project to at least one user')
       return;
     }
-    console.log(name, details, dueDate, category.value, assignedUsers.value)
+
+    const createdBy = {
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      id: user.uid
+    }
+
+    const assignedUsersList = assignedUsers.map((user) => {
+      return {
+        displayName: user.value.displayName,
+        photoURL: user.value.photoURL,
+        id: user.value.id
+
+      }
+    })
+
+    const project = {
+      name,
+      details,
+      category: category.value,
+      dueDate: timestamp.fromDate(new Date(dueDate)),
+      comments: [],
+      createdBy,
+      assignedUsersList
+    }
+
+    console.log(project)
   }
 
   return (
