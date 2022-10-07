@@ -1,6 +1,7 @@
 import React from 'react';
 import {useCollection} from "../../hooks/useCollection";
 import ProjectList from "../../components/ProjectList";
+import ProjectFilter from "./ProjectFilter";
 import "./Dashboard.css"
 
 const Dashboard = () => {
@@ -9,6 +10,7 @@ const Dashboard = () => {
     <div>
       <h2 className='page-title'>Dashboard</h2>
       {error && <p className="error">{error}</p>}
+      {documents && <ProjectFilter/>}
       {documents && <ProjectList projects={documents}/>}
     </div>
   );
